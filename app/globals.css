@@ -1,26 +1,320 @@
-@import "tailwindcss";
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --blue: #2563eb;
+  --blue2: #4f46e5;
+  --green: #10b981;
+  --light: #f8fafc;
+  --dark: #0f172a;
+  --border: #e5e7eb;
+  --muted: #64748b;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+* { box-sizing: border-box; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: #f1f5f9;
+  color: var(--dark);
+}
+
+/* Layout container */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+/* Header (top bar) */
+.topbar {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.topbar-inner {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.avatar-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: none;
+  background: var(--blue);
+  color: white;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 18px rgba(37,99,235,.25);
+}
+
+/* Hero */
+.hero {
+  margin-top: 14px;
+  border-radius: 0;
+  background: linear-gradient(90deg, var(--blue), #6d28d9);
+  color: white;
+  padding: 70px 0;
+  border-top: 1px solid rgba(255,255,255,.14);
+  border-bottom: 1px solid rgba(255,255,255,.14);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 56px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.hero p {
+  margin: 14px 0 0;
+  font-size: 18px;
+  opacity: .9;
+  max-width: 720px;
+}
+
+.hero-actions {
+  margin-top: 22px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.1);
+  color: white;
+  padding: 11px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.hero-btn:hover { background: rgba(255,255,255,.16); }
+
+/* Cards */
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  border: 1px solid var(--border);
+}
+
+.section {
+  margin-top: 18px;
+}
+
+/* Tabs container like screenshot */
+.big-tabs {
+  background: #f1f5f9;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 6px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.big-tab {
+  border: none;
+  background: transparent;
+  padding: 12px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #334155;
+}
+.big-tab.active {
+  background: white;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 20px rgba(0,0,0,.05);
+  color: #0f172a;
+}
+
+/* Upload zone */
+.dropzone {
+  margin-top: 14px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 14px;
+  padding: 34px 18px;
+  background: #f8fafc;
+  text-align: center;
+}
+
+.dropzone.dragover {
+  border-color: var(--blue);
+  background: #eff6ff;
+}
+
+.drop-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: #e0f2fe;
+  color: var(--blue);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 10px;
+  font-size: 26px;
+}
+
+.dropzone h4 {
+  margin: 6px 0 4px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.dropzone p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.btn-main {
+  margin-top: 16px;
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+
+.btn-main:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(37,99,235,.28);
+}
+
+.btn-main:disabled { opacity: .5; cursor: not-allowed; }
+
+/* textarea */
+textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  outline: none;
+  font-size: 14px;
+  background: white;
+}
+textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+}
+
+/* How it works */
+.how {
+  background: #eef2ff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.how h3 {
+  margin: 0 0 16px;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+}
+
+.step {
+  background: rgba(255,255,255,.55);
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.step-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.step-title { font-weight: 900; margin: 0 0 6px; }
+.step-desc { margin: 0; font-size: 13px; color: #475569; line-height: 1.5; }
+
+@media (max-width: 900px) {
+  .steps { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 40px; }
+}
+
+/* Table */
+.table-wrap { overflow-x: auto; }
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.result-table th {
+  text-align: left;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 13px;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.result-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.result-table tr:hover { background: #f8fafc; }
+
+.word-pill {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 800;
+}
+
+/* Highlight output (PDF/text style) */
+.output-text {
+  white-space: pre-wrap;
+  line-height: 1.9;
+  font-size: 15px;
+}
+
+mark {
+  background: linear-gradient(120deg, #86efac, #93c5fd);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-weight: 800;
+}
+
+/* Footer */
+.footer {
+  margin-top: 40px;
+  background: #0b1220;
+  color: #cbd5e1;
+  padding: 26px 0;
+  text-align: center;
+  font-size: 13px;
 }
