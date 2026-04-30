@@ -1,4 +1,4 @@
-import type { AnalyzeResponse } from "./types";
+import type { AnalyzeResponse, HistoryResponse } from "./types";
 
 const BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -21,5 +21,10 @@ export async function analyzeFile(file: File): Promise<AnalyzeResponse> {
     body: fd,
   });
 
+  return res.json();
+}
+
+export async function fetchHistory(limit = 20): Promise<HistoryResponse> {
+  const res = await fetch(`${BASE}/api/history?limit=${limit}`);
   return res.json();
 }
